@@ -2,7 +2,7 @@ import ProductGrid from "@/components/ProductGrid";
 import type { Product } from "@/components/ProductCard";
 
 async function getProducts(): Promise<Product[]> {
-  const res = await fetch("http://localhost:3001/api/products", {
+  const res = await fetch("/api/products", {
     // With Next.js App Router, fetch is cached by default in server components.
     // We want fresh data while developing.
     cache: "no-store",
