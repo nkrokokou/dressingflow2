@@ -1,0 +1,19 @@
+{
+  "name": "dressingflow2",
+  "private": true,
+  "version": "1.0.0",
+  "description": "DressingFlow 2.0 monorepo (frontend + backend)",
+  "packageManager": "pnpm@10.14.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "lint": "pnpm -r lint",
+    "format": "pnpm -r format",
+    "start": "pnpm --filter frontend start",
+    "start:backend": "pnpm --filter backend start:dev"
+  }
+}
