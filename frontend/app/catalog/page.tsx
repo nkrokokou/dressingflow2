@@ -1,14 +1,23 @@
-export default function CatalogPage() {
+import ProductGrid from "@/components/ProductGrid";
+import type { Product } from "@/components/ProductCard";
+
+async function getProducts(): Promise<Product[]> {
+  const res = await fetch("http://localhost:3001/api/products", {
+    // With Next.js App Router, fetch is cached by default in server components.
+    // We want fresh data while developing.
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("Failed to fetch products");
+  return res.json();
+}
+
+export default async function CatalogPage() {
+  const products = await getProducts();
   return (
     <section className="space-y-4">
       <h1 className="text-2xl font-semibold">Catalogue</h1>
       <p className="text-sm text-gray-600">Découvrez les articles populaires et les nouvelles arrivées.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {/* TODO: replace placeholders with real product cards */}
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="rounded-lg border bg-white p-4">Produit #{i + 1}</div>
-        ))}
-      </div>
+      <ProductGrid products={products} />
     </section>
   );
 }
